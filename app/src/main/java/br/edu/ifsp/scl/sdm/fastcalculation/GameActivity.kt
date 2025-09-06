@@ -7,7 +7,7 @@ import android.view.MenuItem
 import br.edu.ifsp.scl.sdm.fastcalculation.Extras.EXTRA_SETTINGS
 import br.edu.ifsp.scl.sdm.fastcalculation.databinding.ActivityGameBinding
 
-class GameActivity : AppCompatActivity(), OnPlayGame {
+class GameActivity : AppCompatActivity(), OnPlayGame, OnFinishGame {
     private val activityGameBinding: ActivityGameBinding by lazy {
         ActivityGameBinding.inflate(layoutInflater)
     }
@@ -54,6 +54,13 @@ class GameActivity : AppCompatActivity(), OnPlayGame {
         supportFragmentManager.beginTransaction().replace(
             R.id.gameFl,
             GameFragment.newInstance(settings)
+        ).commit()
+    }
+
+    override fun onFinishGame(points: Float) {
+        supportFragmentManager.beginTransaction().replace(
+            R.id.gameFl,
+            ResultFragment.newInstance(points = points)
         ).commit()
     }
 }
